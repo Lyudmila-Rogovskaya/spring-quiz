@@ -12,7 +12,21 @@ import static ru.yandex.practicum.quiz.config.AppConfig.ReportMode.VERBOSE;
 import static ru.yandex.practicum.quiz.config.AppConfig.ReportOutputMode.CONSOLE;
 import static ru.yandex.practicum.quiz.config.AppConfig.ReportOutputSettings;
 import static ru.yandex.practicum.quiz.config.AppConfig.ReportSettings;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
+import ru.yandex.practicum.quiz.config.AppConfig;
+import ru.yandex.practicum.quiz.model.QuizLog;
 
+import java.io.PrintWriter;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import static ru.yandex.practicum.quiz.config.AppConfig.ReportMode.VERBOSE;
+import static ru.yandex.practicum.quiz.config.AppConfig.ReportOutputMode.CONSOLE;
+import static ru.yandex.practicum.quiz.config.AppConfig.ReportOutputSettings;
+import static ru.yandex.practicum.quiz.config.AppConfig.ReportSettings;
+
+@Slf4j
 @Component
 public class ReportGenerator { // формирует отчёт о прохождении теста
     private final String reportTitle;
@@ -24,14 +38,14 @@ public class ReportGenerator { // формирует отчёт о прохож�
     }
 
     public void generate(QuizLog quizLog) {
-
-        // если генерация отчёта отключена, завершаем метод
-        if (!reportSettings.isEnabled()) {
+        // если генерация отчёта отключена — завершаем метод
+        if(!reportSettings.isEnabled()) {
+            log.debug("Вывод отчёта отключён, генерация отчёта прекращена");
             return;
         }
 
         ReportOutputSettings outputSettings = reportSettings.getOutput();
-
+        log.trace("Отчёт будет выведен: {}", outputSettings.getMode());
         try {
             // создаём объект PrintWriter, выводящий отчёт в файл или консоль в зависимости от настроек
             boolean isConsole = outputSettings.getMode().equals(CONSOLE);
@@ -43,25 +57,24 @@ public class ReportGenerator { // формирует отчёт о прохож�
                 write(quizLog, writer);
             }
         } catch (Exception exception) {
-            System.out.println("При генерации отчёта произошла ошибка: " + exception.getMessage());
+            log.warn("При генерации отчёта произошла ошибка: ", exception);
         }
     }
 
     private void write(QuizLog quizLog, PrintWriter writer) {
-        writer.println("Отчет о прохождении теста " + reportTitle + "\n");
+        writer.println("Отчёт о прохождении теста " + reportTitle + "\n");
         for (QuizLog.Entry entry : quizLog) {
-            if (reportSettings.getMode().equals(VERBOSE)) {
+            if(reportSettings.getMode().equals(VERBOSE)) {
                 writeVerbose(writer, entry);
             } else {
                 writeConcise(writer, entry);
             }
         }
-
         writer.printf("Всего вопросов: %d\nОтвечено правильно: %d\n", quizLog.total(), quizLog.successful());
     }
 
     private void writeVerbose(PrintWriter writer, QuizLog.Entry entry) {
-        // записываем номер и текст вопроса
+        // Записываем номер и текст вопроса
         writer.println("Вопрос " + entry.getNumber() + ": " + entry.getQuestion().getText());
 
         // записываем варианты ответов
