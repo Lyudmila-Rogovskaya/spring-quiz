@@ -10,7 +10,7 @@ import ru.yandex.practicum.quiz.service.ReportGenerator;
 
 @SpringBootApplication
 @RequiredArgsConstructor
-public class QuizApp implements CommandLineRunner {
+public class QuizApp implements CommandLineRunner { // точка входа в приложение, содержит метод main
     private final ConsoleUI ui;
     private final ReportGenerator reportGenerator;
 
@@ -23,4 +23,5 @@ public class QuizApp implements CommandLineRunner {
         QuizLog log = ui.startQuiz();
         reportGenerator.generate(log);
     }
+
 }

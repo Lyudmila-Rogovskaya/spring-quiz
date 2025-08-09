@@ -9,7 +9,7 @@ import java.util.List;
 
 @Getter
 @Component
-public class QuizConfig {
+public class QuizConfig { // содержит список вопросов — экземпляров класса Question
     private final List<Question> questions;
 
     public QuizConfig() {
@@ -51,4 +51,5 @@ public class QuizConfig {
                 1
         ));
     }
+
 }

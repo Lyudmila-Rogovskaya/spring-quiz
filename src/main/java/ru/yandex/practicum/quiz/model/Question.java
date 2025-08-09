@@ -6,7 +6,7 @@ import lombok.Setter;
 import java.util.List;
 
 @Getter @Setter
-public class Question {
+public class Question { // хранит данные о вопросе: его текст, варианты ответов, правильный ответ и количество доступных попыток
     private String text;
     private List<String> options;
     private int correctAnswerNumber;
@@ -22,4 +22,5 @@ public class Question {
         this.correctAnswerNumber = correctAnswerNumber;
         this.attempts = attempts;
     }
+
 }

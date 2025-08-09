@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * Класс для хранения лога прохождения квиза
  */
-public class QuizLog implements Iterable<QuizLog.Entry> {
+public class QuizLog implements Iterable<QuizLog.Entry> { // ведёт запись ответов пользователя на вопросы теста
     private final List<Entry> log;
 
     public QuizLog(int capacity) {
@@ -66,4 +66,5 @@ public class QuizLog implements Iterable<QuizLog.Entry> {
             return answers.contains(question.getCorrectAnswerNumber());
         }
     }
+
 }

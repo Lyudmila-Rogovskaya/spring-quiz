@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Scanner;
 
 @Component
-public class ConsoleUI {
+public class ConsoleUI { // отвечает за коммуникацию с пользователем: вывод вопросов, считывание и проверку ответов
     private final Scanner input;
     private final QuizLog quizLogger;
     private final List<Question> questions;
@@ -69,4 +69,5 @@ public class ConsoleUI {
         quizLogger.logAnswer(questionNumber, question, answerNumber);
         return answerNumber;
     }
+
 }

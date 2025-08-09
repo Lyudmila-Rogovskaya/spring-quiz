@@ -7,7 +7,7 @@ import java.io.PrintWriter;
 import java.util.List;
 
 @Component
-public class ReportGenerator {
+public class ReportGenerator { // формирует отчёт о прохождении теста
     public void generate(QuizLog quizLog) {
         // Создаём объект PrintWriter, выводящий отчет в консоль
         try (PrintWriter writer = new PrintWriter(System.out)) {
@@ -47,5 +47,5 @@ public class ReportGenerator {
         }
         writer.printf("Всего вопросов: %d\nОтвечено правильно: %d\n", quizLog.total(), quizLog.successful());
     }
-}
 
+}
