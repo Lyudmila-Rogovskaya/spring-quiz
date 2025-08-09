@@ -5,7 +5,8 @@ import lombok.Setter;
 
 import java.util.List;
 
-@Getter @Setter
+@Getter
+@Setter
 public class Question { // хранит данные о вопросе: его текст, варианты ответов, правильный ответ и количество доступных попыток
     private String text;
     private List<String> options;
@@ -13,7 +14,7 @@ public class Question { // хранит данные о вопросе: его �
     private Integer attempts;
 
     public Question(String text, List<String> options, int correctAnswerNumber, Integer attempts) {
-        if(correctAnswerNumber < 1 || correctAnswerNumber > options.size()) {
+        if (correctAnswerNumber < 1 || correctAnswerNumber > options.size()) {
             throw new IllegalArgumentException("Номер правильного ответа: " + correctAnswerNumber
                     + ", всего вариантов: " + options.size());
         }

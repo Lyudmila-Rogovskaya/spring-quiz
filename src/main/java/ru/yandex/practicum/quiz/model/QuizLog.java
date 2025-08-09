@@ -18,6 +18,7 @@ public class QuizLog implements Iterable<QuizLog.Entry> { // ведёт запи
 
     /**
      * Метод для записи ответа на очередной вопрос в лог прохождения квиза
+     *
      * @param number   номер вопроса
      * @param question вопрос
      * @param answer   ответ пользователя

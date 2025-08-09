@@ -44,7 +44,7 @@ public class QuizConfig { // содержит список вопросов — 
 
         questions.add(new Question(
                 "Как можно указать настройки внешней конфигурации в Spring Boot приложении?",
-                List.of( "Через Интернет",
+                List.of("Через Интернет",
                         "Через файлы .yaml и .properties",
                         "Через сайт spring.io"),
                 2,

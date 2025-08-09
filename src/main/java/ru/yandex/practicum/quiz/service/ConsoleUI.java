@@ -1,11 +1,11 @@
 package ru.yandex.practicum.quiz.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import ru.yandex.practicum.quiz.config.QuizConfig;
 import ru.yandex.practicum.quiz.model.Question;
 import ru.yandex.practicum.quiz.model.QuizLog;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 import java.util.Scanner;
@@ -30,7 +30,7 @@ public class ConsoleUI { // отвечает за коммуникацию с п
 
         for (int questionIdx = 0; questionIdx < questions.size(); questionIdx++) {
             Question question = questions.get(questionIdx);
-            processQuestion(questionIdx+1, question);
+            processQuestion(questionIdx + 1, question);
         }
         System.out.println("\n");
         return quizLogger;
@@ -38,7 +38,7 @@ public class ConsoleUI { // отвечает за коммуникацию с п
 
     private void processQuestion(int questionNumber, Question question) {
 
-        for(int attemptIdx = 0; attemptIdx < question.getAttempts(); attemptIdx++) {
+        for (int attemptIdx = 0; attemptIdx < question.getAttempts(); attemptIdx++) {
             System.out.println("\n");
             askQuestion(questionNumber, question, attemptIdx);
 
@@ -47,7 +47,7 @@ public class ConsoleUI { // отвечает за коммуникацию с п
             if (question.getCorrectAnswerNumber() == answerNumber) {
                 break;
             } else {
-                if(attemptIdx+1 < question.getAttempts()) {
+                if (attemptIdx + 1 < question.getAttempts()) {
                     System.out.println("К сожалению ваш ответ неверный, но вы можете попробовать еще раз");
                 }
             }
