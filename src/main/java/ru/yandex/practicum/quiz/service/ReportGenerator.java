@@ -2,12 +2,21 @@ package ru.yandex.practicum.quiz.service;
 
 import org.springframework.stereotype.Component;
 import ru.yandex.practicum.quiz.model.QuizLog;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.PrintWriter;
 import java.util.List;
 
 @Component
 public class ReportGenerator { // формирует отчёт о прохождении теста
+    private final String quizTitle;
+
+    @Autowired
+    public ReportGenerator(@Value("${spring-quiz.title:}") String quizTitle) {
+        this.quizTitle = quizTitle;
+    }
+
     public void generate(QuizLog quizLog) {
         // Создаём объект PrintWriter, выводящий отчет в консоль
         try (PrintWriter writer = new PrintWriter(System.out)) {
@@ -19,7 +28,7 @@ public class ReportGenerator { // формирует отчёт о прохож�
     }
 
     private void write(QuizLog quizLog, PrintWriter writer) {
-        writer.println("Отчет о прохождении теста \"Тест по Spring Framework\".\n");
+        writer.println("Отчет о прохождении теста " + quizTitle + "\n");
         for (QuizLog.Entry entry : quizLog) {
             // Записываем номер вопроса и текст вопроса
             writer.println("Вопрос " + entry.getNumber() + ": " + entry.getQuestion().getText());

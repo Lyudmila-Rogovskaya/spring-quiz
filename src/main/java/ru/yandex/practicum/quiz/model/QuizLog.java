@@ -43,6 +43,7 @@ public class QuizLog implements Iterable<QuizLog.Entry> { // ведёт запи
     public long successful() {
         return log.stream().filter(Entry::isSuccessful).count();
     }
+
     /**
      * Клас, представляющий запись лога прохождения квиза
      */
